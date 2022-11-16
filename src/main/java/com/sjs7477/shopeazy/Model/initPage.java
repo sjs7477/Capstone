@@ -5,15 +5,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("logincred")
 public class initPage {
-        @Id
-    private int _id;
 
         private String user;
         private String password;
 
-    public int get_id() {
-        return _id;
-    }
+   // public int get_id() {
+//        return _id;
+//    }
 
     public String getUser() {
         return user;
@@ -23,9 +21,9 @@ public class initPage {
         return password;
     }
 
-    public void set_id(int _id) {
-        this._id = _id;
-    }
+   // public void set_id(int _id) {
+//        this._id = _id;
+//    }
 
     public void setUser(String user) {
         this.user = user;
@@ -35,10 +33,10 @@ public class initPage {
         this.password = password;
     }
 
-    public initPage(int _id, String user, String password){
+    public initPage(String user, String password){
             super();
         System.out.println("Inside constructor of initPage");
-            this._id = _id;
+           // this._id = _id;
             this.user = user;
             this.password = password;
         }
