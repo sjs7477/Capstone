@@ -37,8 +37,16 @@ public class InitPageControllerTest {
 
     // happy path login
 @Test
+//public void loginCheck(){
+//    String username = "Admin";
+//   // InitPageController mock = org.mockito.Mockito.mock (InitPageController.class);
+//    when(initDetailsRepo.findItemByName(username)).thenReturn((initPage) Stream.
+//            of(new initPage(1,"Admin","1234")).collect(Collectors.toList()));
+//    assertEquals("1234",initPageController.login(username).getPassword());
+//}
 public void loginCheck(){
     String username = "Admin";
+<<<<<<< HEAD
    // InitPageController mock = org.mockito.Mockito.mock (InitPageController.class);
     when(initDetailsRepo.findItemByName(username)).thenReturn((initPage) Stream.
             of(new initPage("Admin","1234")).collect(Collectors.toList()));
@@ -50,6 +58,12 @@ public void loginCheck(){
 //    assertEquals("Admin",username);
 //    assertEquals("1234",password);
 //}
+=======
+    String password = "1234";
+    assertEquals("Admin",username);
+    assertEquals("1234",password);
+}
+>>>>>>> 8ae39d58cfece1b98bf01e1b8e9b1be84d569c94
 
 
     // Test product list attributes
