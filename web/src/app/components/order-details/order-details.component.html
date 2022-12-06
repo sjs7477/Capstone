@@ -1,0 +1,132 @@
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <h5 class="my-0 mr-md-auto font-weight-normal">
+        <app-header></app-header>
+    </h5>
+    <a routerLink="/orders"> My Orders</a>
+    &nbsp;  &nbsp;  &nbsp;  &nbsp;
+    <a routerLink="/cart"> <i class='fas fa-shopping-cart fa-lg'></i></a>
+    &nbsp;  &nbsp;  &nbsp;  &nbsp;
+    <a class="btn btn-primary" (click)="logOut()">Log out</a>
+</div>
+
+<div *ngIf="confirmList.length === 0" class="alert alert-info">No Orders present.</div>
+
+<div *ngIf="confirmList.length > 0" class="container mt-5 mb-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+<!--                <div class="text-left logo p-2 px-5"> <img src="https://i.imgur.com/2zDU056.png" width="50"> </div>-->
+                <div class="invoice p-5">
+                    <h5>Your order Confirmed!</h5> <span>You order has been confirmed and will be shipped in next two days!</span>
+<!--                    <div class="payment border-top mt-3 mb-3 border-bottom table-responsive">-->
+<!--                        <table class="table table-borderless">-->
+<!--                            <tbody>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div class="py-2"> <span class="d-block text-muted">Order Date</span> <span>12 Jan,2018</span> </div>-->
+<!--                                </td>-->
+<!--                                <td>-->
+<!--                                    <div class="py-2"> <span class="d-block text-muted">Order No</span> <span>MT12332345</span> </div>-->
+<!--                                </td>-->
+<!--                                <td>-->
+<!--                                    <div class="py-2"> <span class="d-block text-muted">Payment</span> <span><img src="https://img.icons8.com/color/48/000000/mastercard.png" width="20" /></span> </div>-->
+<!--                                </td>-->
+<!--                                <td>-->
+<!--                                    <div class="py-2"> <span class="d-block text-muted">Shiping Address</span> <span>414 Advert Avenue, NY,USA</span> </div>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+<!--                    </div>-->
+                    <hr>
+                    <div class="product border-bottom">
+                        <table class="table table-borderless">
+                            <tbody>
+                            <div *ngFor="let order of confirmList">
+                            <tr>
+                                <td width="20%"> <img src={{order.imgUrl}} width="90"> </td>
+                                <td width="60%"> <span class="font-weight-bold">{{order.itemName}}</span>
+                                    <div class="product-qty"> <span class="d-block">Quantity:{{order.qty}}</span> </div>
+                                </td>
+                                <td width="20%">
+                                    <div class="text-right"> <span class="font-weight-bold">{{order.price|currency:'USD'}}</span> </div>
+                                </td>
+<!--                                testing-->
+                                <td width="60%"> <span class="font-weight-bold">{{order.orderDate}}</span> </td>
+                                <td width="60%"> <span class="font-weight-bold">{{order.uniqueId}}</span> </td>
+                                <td width="60%"> <span class="font-weight-bold">{{order.address}}</span> </td>
+<!--                                <td><button class="btn btn-danger" (click)="checkCancellation()">Cancel order</button></td>-->
+                            </tr>
+                            </div>
+<!--                            <tr>-->
+<!--                                <td width="20%"> <img src="https://i.imgur.com/SmBOua9.jpg" width="70"> </td>-->
+<!--                                <td width="60%"> <span class="font-weight-bold">Men's Collar T-shirt</span>-->
+<!--                                    <div class="product-qty"> <span class="d-block">Quantity:1</span> <span>Color:Orange</span> </div>-->
+<!--                                </td>-->
+<!--                                <td width="20%">-->
+<!--                                    <div class="text-right"> <span class="font-weight-bold">$77.50</span> </div>-->
+<!--                                </td>-->
+<!--                                <td>-->
+<!--&lt;!&ndash;                                    <strong class="btn btn-danger">Cancel</strong>&ndash;&gt;-->
+<!--                                </td>-->
+<!--                            </tr>-->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row d-flex justify-content-end">
+                        <div class="col-md-5">
+                            <table class="table table-borderless">
+                                <tbody class="totals">
+<!--                                <tr>-->
+<!--                                    <td>-->
+<!--                                        <div class="text-left"> <span class="text-muted">Subtotal</span> </div>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <div class="text-right"> <span>$168.50</span> </div>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>-->
+<!--                                        <div class="text-left"> <span class="text-muted">Shipping Fee</span> </div>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <div class="text-right"> <span>$22</span> </div>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>-->
+<!--                                        <div class="text-left"> <span class="text-muted">Tax Fee</span> </div>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <div class="text-right"> <span>$7.65</span> </div>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>-->
+<!--                                        <div class="text-left"> <span class="text-muted">Discount</span> </div>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <div class="text-right"> <span class="text-success">$168.50</span> </div>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+                                <tr class="border-top border-bottom">
+                                    <td>
+                                        <div class="text-left"> <span class="font-weight-bold">Subtotal</span> </div>
+                                    </td>
+                                    <td>
+                                        <div class="text-right"> <span class="font-weight-bold">{{total|currency:'USD'}}</span> </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <p>We will be sending shipping confirmation email when the item shipped successfully!</p>
+                    <p class="font-weight-bold mb-0">Thanks for shopping with us!</p>
+                </div>
+<!--                <div class="d-flex justify-content-between footer p-3"> <span>Need Help? visit our <a href="#"> help center</a></span> <span>12 June, 2020</span> </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -2,10 +2,8 @@ package com.sjs7477.shopeazy;
 
 
 import com.sjs7477.shopeazy.Controllers.InitPageController;
-import com.sjs7477.shopeazy.Model.cart;
 import com.sjs7477.shopeazy.Model.initPage;
 import com.sjs7477.shopeazy.Model.productList;
-import com.sjs7477.shopeazy.repository.addToCartRepository;
 import com.sjs7477.shopeazy.repository.initPageRepository;
 import com.sjs7477.shopeazy.repository.productListRepository;
 import org.junit.jupiter.api.Test;
@@ -22,7 +20,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class InitPageControllerTest {
@@ -31,11 +29,42 @@ public class InitPageControllerTest {
 @Autowired
     private TestRestTemplate testRestTemplate;
     @MockBean
-    addToCartRepository cartRepo;
+    initPageRepository initDetailsRepo;
     @MockBean
     private productListRepository productRepo;
     @Autowired
     private InitPageController initPageController;
+
+    // happy path login
+@Test
+//public void loginCheck(){
+//    String username = "Admin";
+//   // InitPageController mock = org.mockito.Mockito.mock (InitPageController.class);
+//    when(initDetailsRepo.findItemByName(username)).thenReturn((initPage) Stream.
+//            of(new initPage(1,"Admin","1234")).collect(Collectors.toList()));
+//    assertEquals("1234",initPageController.login(username).getPassword());
+//}
+public void loginCheck(){
+    String username = "Admin";
+<<<<<<< HEAD
+   // InitPageController mock = org.mockito.Mockito.mock (InitPageController.class);
+    when(initDetailsRepo.findItemByName(username)).thenReturn((initPage) Stream.
+            of(new initPage("Admin","1234")).collect(Collectors.toList()));
+    assertEquals("1234",initPageController.login(username).getPassword());
+}
+//public void loginCheck(){
+//    String username = "Admin";
+//    String password = "1234"
+//    assertEquals("Admin",username);
+//    assertEquals("1234",password);
+//}
+=======
+    String password = "1234";
+    assertEquals("Admin",username);
+    assertEquals("1234",password);
+}
+>>>>>>> 8ae39d58cfece1b98bf01e1b8e9b1be84d569c94
+
 
     // Test product list attributes
 
@@ -46,25 +75,5 @@ public class InitPageControllerTest {
         assertEquals(1,initPageController.viewProductDetails().size());
     }
 
-    @Test
-    public void viewCartDetailsTest(){
-        when(cartRepo.findAll()).thenReturn(Stream.of(new cart("user","product",3,2.5,"imageUrl")).collect(Collectors.toList()));
-        assertEquals(1,initPageController.viewCartDetails().size());
-    }
-@Test
-    public void deleteCartItemTestHappy(){
-        String username = "user1";
-        String product = "product1";
-        initPageController.deleteCartItem(username,product);
-        verify(cartRepo,times(1)).deleteByUserAndProduct(username,product);
-}
-
-    @Test
-    public void deleteCartItemTestFailure(){
-        String username = "user1";
-        String product = "product1";
-       // initPageController.deleteCartItem(username,product);
-        verify(cartRepo,times(0)).deleteByUserAndProduct(username,product);
-    }
 
 }

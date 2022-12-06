@@ -2,6 +2,8 @@
     <h5 class="my-0 mr-md-auto font-weight-normal">
         <app-header></app-header>
     </h5>
+    <a routerLink="/orders"> My Orders</a>
+    &nbsp;  &nbsp;  &nbsp;  &nbsp;
     <a routerLink="/cart"> <i class='fas fa-shopping-cart fa-lg'></i></a>
     &nbsp;  &nbsp;  &nbsp;  &nbsp;
     <a class="btn btn-primary" (click)="logOut()">Log out</a>
@@ -17,6 +19,6 @@
 
     <li class="list-group-item">
         <strong>Total</strong> {{ cartTotal | currency:'USD' }}
-        <strong class="btn btn-primary" style="float: right">Checkout</strong>
+        <strong class="btn btn-primary" style="float: right" (click)="checkOut()">Checkout</strong>
     </li>
 </ul>

@@ -17,6 +17,8 @@ import { PageNotFoundComponent } from './components/shared/page-not-found/page-n
 import {AuthguardGuard} from "./auth/authguard.guard";
 import { CartComponent } from './components/cart/cart.component';
 import { CartItemComponent } from './components/cart/cart-item/cart-item.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { CartItemComponent } from './components/cart/cart-item/cart-item.compone
     RegisterComponent,
     PageNotFoundComponent,
     CartComponent,
-    CartItemComponent
+    CartItemComponent,
+    CheckoutComponent,
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,

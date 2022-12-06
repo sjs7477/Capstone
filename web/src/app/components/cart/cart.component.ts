@@ -12,6 +12,7 @@ import {CartService} from "../../services/cart.service";
 })
 export class CartComponent implements OnInit {
    user = localStorage.getItem('currentUser');
+   cartQty:boolean = false;
   @Input() cartItem: any;
   cartItems = [];
 
@@ -32,18 +33,12 @@ export class CartComponent implements OnInit {
       for(let i=0;i<items.length;i++){
         if(items[i].user ==this.user){
           this.cartItems.push(items[i]);
-          // console.log(items[i].user);
-          // console.log(this.user);
-         // items.pop();
         }
         this.calcCartTotal();
       }
-      console.log(this.user);
-      // if(items.user==this.user){
-
-      // }
-      console.log("Inside");
-      console.log(this.cartItems);
+      // console.log(this.user);
+      // console.log("Inside");
+      // console.log(this.cartItems);
     });
   }
 
@@ -58,5 +53,8 @@ export class CartComponent implements OnInit {
     this.loginService.setUserName(null);
     this.router.navigateByUrl("/login");
     localStorage.removeItem('currentUser');
+  }
+  checkOut(){
+    this.router.navigateByUrl("/checkout");
   }
 }

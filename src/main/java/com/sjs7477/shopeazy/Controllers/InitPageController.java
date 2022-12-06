@@ -1,9 +1,11 @@
 package com.sjs7477.shopeazy.Controllers;
 
 import com.mongodb.client.result.UpdateResult;
+import com.sjs7477.shopeazy.Model.OrderDetails;
 import com.sjs7477.shopeazy.Model.initPage;
 import com.sjs7477.shopeazy.Model.cart;
 import com.sjs7477.shopeazy.Model.productList;
+import com.sjs7477.shopeazy.repository.addOrder;
 import com.sjs7477.shopeazy.repository.addToCartRepository;
 import com.sjs7477.shopeazy.repository.initPageRepository;
 import com.sjs7477.shopeazy.repository.productListRepository;
@@ -17,9 +19,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class InitPageController {
@@ -29,6 +34,9 @@ public class InitPageController {
     productListRepository productListRepo;
     @Autowired
     addToCartRepository cartRepo;
+
+    @Autowired
+    addOrder orderRepo;
     @Autowired
     MongoTemplate mongoTemplate;
     @RequestMapping({"/login"})
@@ -83,8 +91,19 @@ public class InitPageController {
             cartRepo.insert(new cart(username,product,qty,price,imgUrl));
         }
         System.out.println("Created the record!!");
+        System.out.println("details is "+details);
        // System.out.println("jsonString "+jsonString);
         return details;
+    }
+
+    @RequestMapping({"/addOrder"})
+    public void addOrder(@RequestParam("username") String username, @RequestParam("address") String address,
+                         @RequestParam("imgUrl") String imgUrl,@RequestParam("product") String product,@RequestParam("qty") int qty,@RequestParam("price") int price ){
+        String uniqueID = UUID.randomUUID().toString();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        System.out.println("Entered the method addOrder");
+        orderRepo.insert(new OrderDetails(username,address,uniqueID,imgUrl,product,qty,price,formatter.format(date)));
     }
 
     @RequestMapping({"/cartList"})
@@ -104,6 +123,13 @@ public class InitPageController {
             update.set("qty",qty);
             UpdateResult result = mongoTemplate.updateFirst(query,update,cart.class);
             System.out.println(result);
+    }
+
+    @RequestMapping({"/orderDetails"})
+    public  List<OrderDetails> viewOrderDetails(@RequestParam("username") String username){
+        List<OrderDetails> details = orderRepo.findItemByName(username);
+        System.out.println(details);
+        return details;
     }
 
 

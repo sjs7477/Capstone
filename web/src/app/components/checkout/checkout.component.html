@@ -1,0 +1,216 @@
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <h5 class="my-0 mr-md-auto font-weight-normal">
+        <app-header></app-header>
+    </h5>
+    <a routerLink="/orders"> My Orders</a>
+    &nbsp;  &nbsp;  &nbsp;  &nbsp;
+    <a routerLink="/cart"> <i class='fas fa-shopping-cart fa-lg'></i></a>
+    &nbsp;  &nbsp;  &nbsp;  &nbsp;
+    <a class="btn btn-primary" (click)="logOut()">Log out</a>
+</div>
+
+<div class="row">
+    <div class="col-75">
+        <div class="container">
+            <form [formGroup]="checkoutForm" (ngSubmit)="submitOrder()">
+
+                <div class="row">
+                    <div class="col-50">
+                        <h3>Billing Address</h3>
+
+
+                        <div class="form-group">
+                            <label for="fname">Full name</label>
+                            <input
+                                    id="fname"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': checkoutForm.get('fname').touched && checkoutForm.get('fname').invalid }"
+                                    formControlName="fname"
+                            />
+                            <span class="invalid-feedback">Full name can't be blank.</span>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="email"> <i class="fa fa-envelope"></i>Email</label>
+                            <input
+                                    id="email"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': checkoutForm.get('email').touched && checkoutForm.get('email').invalid }"
+                                    formControlName="email"
+                            />
+                            <span class="invalid-feedback">
+              <span *ngIf="checkoutForm.get('email').hasError('required')">Email can't be blank.</span>
+              <span *ngIf="checkoutForm.get('email').hasError('email')">Invalid format of email</span></span>
+                        </div>
+
+<!--                        <label for="email"><i class="fa fa-envelope"></i> Email</label>-->
+<!--                        <input type="text" id="email" name="email" placeholder="john@example.com">-->
+                        <div class="form-group">
+                        <label for="addr"><i class="fa fa-address-card-o"></i> Address</label>
+                        <input
+                                id="addr"
+                                class="form-control"
+                                [ngClass]="{ 'is-invalid': checkoutForm.get('addr').touched && checkoutForm.get('addr').invalid }"
+                                formControlName="addr"
+                                [(ngModel)]="model.addr"
+                        />
+                        <span class="invalid-feedback">Address can't be blank.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="city"><i class="fa fa-address-card-o"></i> City</label>
+                            <input
+                                    id="city"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': checkoutForm.get('city').touched && checkoutForm.get('city').invalid }"
+                                    formControlName="city"
+                            />
+                            <span class="invalid-feedback">City can't be blank.</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-50">
+                                <div class="form-group">
+                                    <label for="state"><i class="fa fa-address-card-o"></i> State</label>
+                                    <input
+                                            id="state"
+                                            class="form-control"
+                                            [ngClass]="{ 'is-invalid': checkoutForm.get('state').touched && checkoutForm.get('state').invalid }"
+                                            formControlName="state"
+                                    />
+                                    <span class="invalid-feedback">State can't be blank.</span>
+                                </div>
+                            </div>
+                            <div class="col-50">
+                                <div class="form-group">
+                                    <label for="zip">Zip</label>
+                                    <input
+                                            id="zip"
+                                            class="form-control"
+                                            [ngClass]="{ 'is-invalid': checkoutForm.get('zip').touched && checkoutForm.get('zip').invalid }"
+                                            formControlName="zip"
+                                    />
+                                    <span class="invalid-feedback">
+              <span *ngIf="checkoutForm.get('zip').hasError('required')">Zip can't be blank.</span>
+              <span *ngIf="checkoutForm.get('zip').hasError('pattern')">Invalid format of Zip</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-50">
+                        <h3>Payment</h3>
+                        <label for="fname">Accepted Cards</label>
+                        <div class="icon-container">
+                            <img src="https://img.icons8.com/color/36/000000/visa.png">
+                            <img src="https://img.icons8.com/color/36/000000/mastercard.png">
+                            <img src="https://img.icons8.com/color/36/000000/amex.png">
+                        </div>
+                        <div class="form-group">
+                            <label for="cardname">Name on card</label>
+                            <input
+                                    id="cardname"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': checkoutForm.get('cardname').touched && checkoutForm.get('cardname').invalid }"
+                                    formControlName="cardname"
+                            />
+                            <span class="invalid-feedback">
+              <span *ngIf="checkoutForm.get('cardname').hasError('required')">Card name can't be blank.</span>
+              </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardnum">Credit card number</label>
+                            <input
+                                    id="cardnum"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': checkoutForm.get('cardnum').touched && checkoutForm.get('cardnum').invalid }"
+                                    formControlName="cardnum"
+                                    placeholder="1111-2222-3333-4444"
+                            />
+                            <span class="invalid-feedback">
+              <span *ngIf="checkoutForm.get('cardnum').hasError('required')">Card number can't be blank.</span>
+              <span *ngIf="checkoutForm.get('cardnum').hasError('pattern')">Card number must be 16 digits.</span></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="expmonth">Exp Month</label>
+                            <input
+                                    id="expmonth"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': checkoutForm.get('expmonth').touched && checkoutForm.get('expmonth').invalid }"
+                                    formControlName="expmonth"
+                            />
+                            <span class="invalid-feedback">
+              <span *ngIf="checkoutForm.get('expmonth').hasError('required')">Expiry month can't be blank.</span>
+              <span *ngIf="checkoutForm.get('expmonth').hasError('pattern')">Expiry month must be 2 digits</span></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-50">
+                                <div class="form-group">
+                                    <label for="expyr">Exp Year</label>
+                                    <input
+                                            id="expyr"
+                                            class="form-control"
+                                            [ngClass]="{ 'is-invalid': checkoutForm.get('expyr').touched && checkoutForm.get('expyr').invalid }"
+                                            formControlName="expyr"
+                                    />
+                                    <span class="invalid-feedback">
+              <span *ngIf="checkoutForm.get('expyr').hasError('required')">Expiry year can't be blank.</span>
+              <span *ngIf="checkoutForm.get('expyr').hasError('pattern')">Enter valid expiration date</span></span>
+                                </div>
+                            </div>
+                            <div class="col-50">
+                                <div class="form-group">
+                                    <label for="cvv">CVV</label>
+                                    <input type="password"
+                                            id="cvv"
+                                            class="form-control"
+                                            [ngClass]="{ 'is-invalid': checkoutForm.get('cvv').touched && checkoutForm.get('cvv').invalid }"
+                                            formControlName="cvv"
+                                    />
+                                    <span class="invalid-feedback">
+              <span *ngIf="checkoutForm.get('cvv').hasError('required')">CVV can't be blank.</span>
+              <span *ngIf="checkoutForm.get('cvv').hasError('pattern')">Enter valid CVV</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+<!--                <label>-->
+<!--                    <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing-->
+<!--                </label>-->
+                <input type="submit" value="Place order" class="btn" style="background-color: #04AA6D;
+    color: white;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    width: 100%;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 17px;" [disabled]="checkoutForm.invalid">
+            </form>
+        </div>
+    </div>
+
+    <div class="col-25">
+        <div class="container">
+            <h4>Cart
+                <span class="price" style="color:black">
+          <i class="fa fa-shopping-cart"></i>
+          <b>{{cartItemLength}}</b>
+        </span>
+            </h4>
+<!--            *ngFor="let item of cartItems"-->
+            <div *ngFor="let item of cartItems">
+                <p><a href="#">{{item.product}}</a> <span class="price" style="color:black"><b>{{item.price*item.qty}}</b></span></p>
+<!--            <p><a href="#">Product 2</a> <span class="price">$5</span></p>-->
+<!--            <p><a href="#">Product 3</a> <span class="price">$8</span></p>-->
+<!--            <p><a href="#">Product 4</a> <span class="price">$2</span></p>-->
+            <hr>
+            </div>
+            <p>Total <span class="price" style="color:black"><b>{{cartTotal | currency:'USD'}}</b></span></p>
+        </div>
+    </div>
+</div>

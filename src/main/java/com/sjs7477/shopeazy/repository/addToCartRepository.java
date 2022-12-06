@@ -1,6 +1,7 @@
 package com.sjs7477.shopeazy.repository;
 
 import com.mongodb.client.result.UpdateResult;
+import com.sjs7477.shopeazy.Model.OrderDetails;
 import com.sjs7477.shopeazy.Model.cart;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;

@@ -22,10 +22,16 @@ export class CartItemComponent implements OnInit {
   }
 
   updateTotal(){
+      if(this.cartItem.qty >0){
     this.cartcomponent.calcCartTotal();
     let userUrl = "http://localhost:8080/updateItem?";
       this.http.get(userUrl+"username="+this.cartItem.user+"&product="+this.cartItem.product+"&qty="+this.cartItem.qty).subscribe();
       window.location.reload();
+      }
+      else{
+          window.location.reload();
+          alert("Please enter a valid quantity");
+      }
   }
 
 }
